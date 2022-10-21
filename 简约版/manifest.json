@@ -1,0 +1,21 @@
+{
+    "name":"night mode",
+    "manifest_version": 2,
+    "version":"1.0",
+    "description":"to change into the night mode",
+    "browser_action":{
+        "default_icon":"icon.png"
+    },
+    "permissions":[
+        "tabs",
+        "https://www.bilibili.com/",
+        "https://www.bilibili.com/*"
+    ],
+    "content_scripts":[
+        {
+          "matches":["https://www.bilibili.com/","https://www.bilibili.com/*"],
+          "run_at":"document_end",
+          "js":["content.js","content2.js"]  
+        }
+    ]
+}
