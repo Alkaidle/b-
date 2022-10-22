@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="css/font-awesome.min.css"/>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        /*多媒体标题(给figure添加)*/
+        figcaption{
+            text-align: center;
+            line-height: 150px;
+            font-family: "Microsoft Yahei";
+            font-size: 24px;
+        }
+        /*播放器*/
+        .player{
+            width: 720px;
+            height: 360px;
+            margin: 10px auto;
+            border: 1px solid #000;
+            background: url(image/loading.gif) center no-repeat #000;
+            background-size: auto 100%;
+            position: relative;
+            border-radius: 20px;
+        }
+        .player video{
+            height: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+        /*控制条*/
+        .controls{
+            width: 700px;
+            height: 40px;
+            background-color: yellow;
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            border-radius: 10px;
+        }
+        /*开关*/
+        .switch{
+            position: absolute;
+            width: 20px;
+            left: 10px;
+            top: 10px;
+
+            text-align: center;
+            line-height: 20px;
+            color: yellow;
+        }
+        /*进度条*/
+        .progress{
+            width: 432px;
+            height: 10px;
+            position: absolute;
+            background-color: white;
+            left: 4px;
+            top: 15px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        /*当前进度*/
+        .curr-progress{
+            width: 50%;
+            height: 20px;
+            background-color: white;
+        }
+        /*时间模块*/
+        .time{
+            width: 120px;
+            height: 10px;
+            text-align: center;
+            line-height: 20px;
+            color: white;
+            position: absolute;
+            left: 510px;
+            top: 10px;
+            font-size: 12px;
+        }
+        /*全屏*/
+        .extend{
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: 20px;
+            top: 10px;
+            text-align: center;
+            line-height: 20px;
+            color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <!--多媒体-->
+    <figure>
+        <figcaption>视频案例</figcaption>
+        <div class="player">
+            <video src="video/fun.mp4"></video>
+            <div  class="controls">
+                <a href="#" class="switch  icon-play"></a>
+                <div class="progress">
+                    <div class="curr-progress"></div>
+                </div>
+                <div class="time">
+                    <span class="curr-time">00:00:00</span>/<span class="total-time">00:00:00</span>
+                </div>
+                <a href="#" class="extend  icon-resize-full"></a>
+            </div>
+        </div>
+    </figure>
+
+    <script>
+        var video=document.querySelector('video');
+        var playBtn=document.querySelector('.switch');
+        var currProgress=document.querySelector('.curr-progress');
+        var currTime=document.querySelector('.curr-time');
+        var totalTime=document.querySelector('.total-time');
+        var extend=document.querySelector('.extend');
+        
+        var tTime=0;
+
+        //点按钮实现播放暂停，切换图标
+        playBtn.onclick=function(){
+            if(video.paused){
+                video.play();
+                this.classList.remove('icon-play');
+                this.classList.add('icon-pause');
+            }else{
+                video.pause();
+                this.classList.remove('icon-pause');
+                this.classList.add('icon-play');
+            }
+        }
+        //算出视频总长并显示出来
+        video.oncanplay=function(){
+            //获取总时长
+            tTime=video.duration;
+            console.log(tTime);
+            //总秒数转换
+            var h=Math.floor(tTime/3600);
+            var m=Math.floor(tTime%3600/60);
+            var s=Math.floor(tTime%60);
+            /*
+            console.log(h);
+            console.log(m);
+            console.log(s);
+            */
+           //数据转成时分秒
+           h=h>=10?h:"0"+h;
+           m=m>=10?m:"0"+m;
+           s=s>=10?s:"0"+s;
+
+           console.log(h);
+           console.log(m);
+           console.log(s);
+
+           totalTime.innerHTML=h+":"+m+":"+s;
+        }
+        //进度条和时间同步
+        //当前时间更新何时触发
+        video.ontimeupdate=function(){
+            //获取视频当前播放时间
+            console.log(video.currentTime);
+            //当前播放时间
+            var cTime=video.currentTime;
+
+            var h=Math.floor(cTime/3600);
+            var m=Math.floor(cTime%3600/60);
+            var s=Math.floor(cTime%60);
+            h=h>=10?h:"0"+h;
+            m=m>=10?m:"0"+m;
+            s=s>=10?s:"0"+s;
+            //显示当前时间
+            currTime.innerHTML=h+":"+m+":"+s;
+            //改变宽度：当前时间/总时间
+            var value=cTime/tTime;
+            currProgress.style.width=value*100+"%";
+        }
+        //全屏
+        extend.onclick=function(){
+            video.webkitRequestFullScreen();
+        }
+    </script>
+</body>
+</html>
