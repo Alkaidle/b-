@@ -40,7 +40,8 @@ clas3[0].appendChild(button);
 }
 */
 
-if(document.getElementsByClassName("video-container-v1")!=null){
+setTimeout("popup()",1500);
+function popup(){
 var input=prompt("请输入倍数","1")
 if(input!=null && input!=""){
     document.querySelector('video').playbackRate=input;
