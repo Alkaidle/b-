@@ -1,4 +1,7 @@
 window.onload=function(){
+    setTimeout(a,5000);
+    function a()
+    {
     Array.from(document.getElementsByClassName("bili-feed4-layout")).forEach(element => {
         element.style.backgroundColor="#696969";
     });
@@ -46,10 +49,14 @@ window.onload=function(){
     Array.from(document.getElementsByClassName("bili-movie-card__wrap __scale-wrap")).forEach(element => {
         element.style.backgroundColor="#696969";
     });
+    Array.from(document.getElementsByClassName("bili-live-card__wrap __scale-wrap")).forEach(element => {
+        element.style.backgroundColor="#696969";
+    });
     //字体
     Array.from(document.getElementsByClassName("bili-video-card__info--owner")).forEach(element => {
         element.style.color="white";
     });
+
 
     Array.from(document.getElementsByClassName("video-container-v1")).forEach(element => {
         element.style.backgroundColor="#696969";
@@ -69,13 +76,34 @@ window.onload=function(){
     Array.from(document.getElementsByClassName("comment-container")).forEach(element => {
         element.style.backgroundColor="#696969";
     });
+    Array.from(document.getElementsByClassName("reply-warp")).forEach(element => {
+        element.style.backgroundColor="#696969";
+    });
+    Array.from(document.getElementsByClassName("reply-box-textarea focus")).forEach(element => {
+        element.style.backgroundColor="#696969";
+    });
+    Array.from(document.getElementsByClassName("bui-collapse-wrap bui-collapse-wrap-folded")).forEach(element => {
+        element.style.backgroundColor="#696969";
+    });
     Array.from(document.getElementsByClassName("bpx-player-video-info-online")).forEach(element => {
         element.style.color="black";
     }); //“已加载多少弹幕”
     Array.from(document.getElementsByClassName("bpx-player-video-info-dm")).forEach(element => {
         element.style.color="black";
     }); //“多少人在看”
-    
+    Array.from(document.getElementsByClassName("bui-danmaku-switch-label")).forEach(element => {
+        element.style.color="white";
+    });	
+    Array.from(document.getElementsByClassName("bpx-common-svg-icon")).forEach(element => {
+        element.style.color="white";
+    });
+    Array.from(document.getElementsByClassName("playinfo")).forEach(element => {
+        element.style.color="#E8E8E8";
+    });
+    Array.from(document.getElementsByClassName("info-text")).forEach(element => {
+        element.style.color="white";
+    });
+}
 }
 
 /*function addClass(element, value) {
